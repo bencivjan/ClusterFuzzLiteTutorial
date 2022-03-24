@@ -2,8 +2,8 @@ FROM golang:1.9
 
 # Install Jupyter Notebook
 # `hash -r pip` is a workaround of pip v10 related issue (https://github.com/pypa/pip/issues/5221#issuecomment-382069604)
-RUN apt-get update && apt-get install -y libzmq3-dev python3-pip && rm -rf /var/lib/apt/lists/*
-RUN pip3 install --upgrade pip && hash -r pip && pip3 install -U jupyter jupyterlab && jupyter serverextension enable --py jupyterlab --sys-prefix
+RUN apt-get update && apt-get install -y libzmq3-dev python-pip && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip && hash -r pip && pip install -U jupyter jupyterlab && jupyter serverextension enable --py jupyterlab --sys-prefix
 
 # Install lgo Jupyter lab extension to support code formatting.
 # Please remove this line if you do not use JupyterLab.
@@ -40,7 +40,7 @@ RUN go get -u github.com/nfnt/resize gonum.org/v1/gonum/... gonum.org/v1/plot/..
 
 # Install lgo
 RUN lgo install && lgo installpkg github.com/nfnt/resize gonum.org/v1/gonum/... gonum.org/v1/plot/... github.com/wcharczuk/go-chart
-RUN python3 $GOPATH/src/github.com/yunabe/lgo/bin/install_kernel
+RUN $GOPATH/src/github.com/yunabe/lgo/bin/install_kernel
 
 # Notes:
 # 1. Do not use ENTRYPOINT because mybinder need to run a custom command.
