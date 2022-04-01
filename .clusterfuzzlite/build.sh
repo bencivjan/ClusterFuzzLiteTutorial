@@ -3,9 +3,11 @@
 # pip3 install .
 
 # Build fuzzers into $OUT. These could be detected in other ways.
-for fuzzer in $(find $SRC -name '*_fuzzer.py'); do
-  fuzzer_basename=$(basename -s .py $fuzzer)
-  fuzzer_package=${fuzzer_basename}.pkg
+# for fuzzer in $(find $SRC -name '*_fuzzer.py'); do
+
+# fuzzer_basename=$(basename -s .py $fuzzer)
+# fuzzer_package=${fuzzer_basename}.pkg
+find . -name '*_fuzzer' -exec cp -v '{}' $OUT ';'
 
   # To avoid issues with Python version conflicts, or changes in environment
   # over time, we use pyinstaller to create a standalone
